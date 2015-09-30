@@ -1,2 +1,2 @@
 # CS113
-Our CS113 game
+Our game will be a sidescroller 
