@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class eventPopUp : MonoBehaviour {
-	String characterName = "CharacterRobotBoy";
+	string characterName = "CharacterRobotBoy";
 	// Use this for initialization
 	void Start () {
 	

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace _113Quiz
 {
@@ -12,10 +12,10 @@ namespace _113Quiz
         private int numberOfQuestions;
         public List<Question> questions;
 
-        public Quiz(int numberOfQuestions)
+        public Quiz(int numberOfQuestion)
         {
             currentQuestion = 0;
-            this.numberOfQuestions = numberOfQuestions;
+            numberOfQuestions = numberOfQuestion;
             questions = generateQuestions(numberOfQuestions);
         }
 
