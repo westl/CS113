@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 
-namespace _113Quiz
-{
     class BasicCountingQuestion : Question
     {
       
@@ -13,7 +12,6 @@ namespace _113Quiz
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             int correctAnwser;
            
-
             public BasicCountingQuestion()
             {
                 generateQuestion();
@@ -80,4 +78,4 @@ namespace _113Quiz
 
         }
     
-}
+

@@ -1,11 +1,11 @@
 ﻿using System;
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 
-namespace _113Quiz
-{
     public class Quiz
     {
         private int currentQuestion;
@@ -18,7 +18,7 @@ namespace _113Quiz
             numberOfQuestions = numberOfQuestion;
             questions = generateQuestions(numberOfQuestions);
         }
-
+	     
         public Question getNextQuestion()
         {
 
@@ -51,4 +51,4 @@ namespace _113Quiz
 
     }
 
-}
+
