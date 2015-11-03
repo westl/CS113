@@ -13,7 +13,7 @@ public class QuizWindow : MonoBehaviour {
 	private string answer2;
 	private string answer3;
 	private string answer4;
-
+	private Texture aTexture;
 	public void ShowWindow(){
 		showWindow = true;
 		//After showWindow is set to true OnGUI should initiate and create a window with the rectangle we 
@@ -43,19 +43,16 @@ public class QuizWindow : MonoBehaviour {
 
 	void OnGUI() {
 		if (showWindow) {
-			//This calls the function directly from the movement class thats attached to our character
-			Movement.PauseMovement();
 			//The window is then made 
+			aTexture = 
 			GUI.ModalWindow(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
-			//GUI.Label(new Rect (quizWindow.xMin + 10, quizWindow.yMin + 40, quizWindow.x, quizWindow.xMax),
-			         //  displayMessage);
-			//GUI.skin.label.wordWrap = true;
 			GUI.skin.window.wordWrap = true;
+			//TODO look up how to draw textures into the window, so we can generate textures depending on the question
+			GUI.DrawTexture(new Rect(10, 10, 60, 60), aTexture, ScaleMode.ScaleToFit, true, 10.0F);
 		}
 		
 	}
 	void DoMyWindow(int windowID) {
-
 
 		if (GUI.Button (new Rect (quizWindow.xMin + 10, quizWindow.yMax - 40, 100, 30), answer1)){
 			//Button A was pressed, this will be the number 0 when checking answers

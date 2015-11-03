@@ -19,6 +19,7 @@ public class eventPopUp : MonoBehaviour {
 
 		if (coll.collider.name == characterName)
 		{
+			Movement.PauseMovement();
 			//Create one quiz
 			Quiz newQuiz = new Quiz(1);
 
