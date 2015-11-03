@@ -44,7 +44,6 @@ public class QuizWindow : MonoBehaviour {
 	void OnGUI() {
 		if (showWindow) {
 			//The window is then made 
-			aTexture = 
 			GUI.ModalWindow(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
 			GUI.skin.window.wordWrap = true;
 			//TODO look up how to draw textures into the window, so we can generate textures depending on the question
