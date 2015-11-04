@@ -14,11 +14,12 @@ public class QuizWindow : MonoBehaviour {
 	private string answer3;
 	private string answer4;
 	private Texture aTexture;
+	private Question quizQuestion;
+
 	public void ShowWindow(){
 		showWindow = true;
 		//After showWindow is set to true OnGUI should initiate and create a window with the rectangle we 
 		//declared above to be centered by the centerRectangle function. 
-
 	}
 
 
@@ -29,16 +30,17 @@ public class QuizWindow : MonoBehaviour {
 		return quizWindow;
 	}
 
-	public void CreateWindow(string displayMessage, string answer1, string answer2, string answer3, string answer4){
+	public void CreateWindow(Question question){
 	quizWindow = new Rect(0,0,500,500);
 	//We want to make sure the window has all the information it will contain before we display the window
 	//otherwise sometimes the window will show up with its default values, while this is not a problem
 	//it would be better to make sure these variables contain the information they need to show regardless.
-	this.displayMessage = displayMessage;
-	this.answer1 = answer1;
-	this.answer2 = answer2;
-	this.answer3 = answer3;
-	this.answer4 = answer4;
+		quizQuestion = question;
+		this.displayMessage = question.getQuestionString();
+		this.answer1 = question.getAnwsers()[0];
+		this.answer2 = question.getAnwsers()[1];
+		this.answer3 = question.getAnwsers()[2];
+		this.answer4 = question.getAnwsers()[3];
 	}
 
 	void OnGUI() {
@@ -55,17 +57,21 @@ public class QuizWindow : MonoBehaviour {
 
 		if (GUI.Button (new Rect (quizWindow.xMin + 10, quizWindow.yMax - 40, 100, 30), answer1)){
 			//Button A was pressed, this will be the number 0 when checking answers
+			print(quizQuestion.checkAnwser(0));
 			
 		}
 		if (GUI.Button (new Rect (quizWindow.xMin + 140, quizWindow.yMax - 40, 100, 30), answer2)) { 
 			//Button B was pressed, this will be the number 1 when checking answers
+			print(quizQuestion.checkAnwser(1));
 		}
 		if (GUI.Button (new Rect (quizWindow.xMax - 230, quizWindow.yMax - 40, 100, 30), answer3)) { 
 			//Button C was pressed, this will be the number 2 when checking answers
+			print(quizQuestion.checkAnwser(2));
 		}
 		if (GUI.Button(new Rect(quizWindow.xMax-110, quizWindow.yMax-40, 100, 30), answer4)) 
 		{
 			//Button D was pressed, this will be the number 3 when checking answers
+			print(quizQuestion.checkAnwser(3));
 			
 		}
 	}

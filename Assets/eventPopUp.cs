@@ -31,9 +31,7 @@ public class eventPopUp : MonoBehaviour {
 
 			//create a quiz window with the new data to display
 			QuizWindow quizWindow = gameObject.AddComponent<QuizWindow>();
-			quizWindow.CreateWindow(currentQuestion.getQuestionString(),
-			                            possibleAnswers[0],possibleAnswers[1],
-			                            possibleAnswers[2],possibleAnswers[3]);
+			quizWindow.CreateWindow(currentQuestion);
 
 			//show the window after all the data is assigned 
 			quizWindow.ShowWindow();
