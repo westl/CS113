@@ -26,9 +26,6 @@ public class eventPopUp : MonoBehaviour {
 			//Get the currentQuestion
 			Question currentQuestion = newQuiz.getCurrentQuestion();
 
-			//Get the list of possibleAnswers
-			List<string> possibleAnswers = currentQuestion.getAnwsers();
-
 			//create a quiz window with the new data to display
 			QuizWindow quizWindow = gameObject.AddComponent<QuizWindow>();
 			quizWindow.CreateWindow(currentQuestion);

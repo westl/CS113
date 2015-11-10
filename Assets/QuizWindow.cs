@@ -13,11 +13,13 @@ public class QuizWindow : MonoBehaviour {
 	private string answer2;
 	private string answer3;
 	private string answer4;
-	private Texture itemToDraw;
+	private Texture2D itemToDraw;
 	private Question quizQuestion;
-	private string theAnwser;
+	private string answerValue;
 	private string questionType;
-
+	private int counterForDrawing; //number of times to draw the texture
+	private float texturexPosition ; //intial placement of the texture on the x-axis
+	private float textureyPosition; //initial placement of the texture on the y-axis
 
 	public void ShowWindow(){
 		showWindow = true;
@@ -44,8 +46,9 @@ public class QuizWindow : MonoBehaviour {
 		this.answer2 = question.getAnwsers()[1];
 		this.answer3 = question.getAnwsers()[2];
 		this.answer4 = question.getAnwsers()[3];
-		this.theAnwser = question.getCorrectAnwserValue ();
+		this.answerValue = question.getCorrectAnwserValue();
 		this.questionType = question.getTexture ();
+		counterForDrawing = IntParseFast (answerValue);
 
 	}
 
@@ -54,18 +57,39 @@ public class QuizWindow : MonoBehaviour {
 			//The window is then made 
 			GUI.ModalWindow(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
 			GUI.skin.window.wordWrap = true;
-			//TODO look up how to draw textures into the window, so we can generate textures depending on the question
-			//string test = "";
-			//if(test.Equals("Flower Question")){
-			//	itemToDraw = Resources.Load("Images/CratePinkGridSprite");
-			//}
-			GUI.DrawTexture(new Rect(10, 10, 60, 60), itemToDraw, ScaleMode.ScaleToFit, true, 10.0F);
+
+			//Depending if the type of question regards flowers, balls, etc we need to draw that image onto the quiz window.
+			texturexPosition = quizWindow.width-100;
+			textureyPosition = quizWindow.height/2;
+
+			//Each question will have an identifier to inform us on which texture to draw
+			if(questionType.Equals("Flower Question")){
+				itemToDraw = (Texture2D)Resources.Load("Images/CratePinkGridSprite");
+			}
+			else if(questionType.Equals("Balls")){
+				//do nothing for now.
+			}
+
+			//After we know which texture to draw we need to know how many times to draw it.
+			//the counterForDrawing variable tells us how many times to draw this texture.
+			for(int i = 0 ; i < counterForDrawing ; i++){
+				//for now each row will have  5 textures before creating a new row. 
+				if( (i%5)==0 ){
+					texturexPosition = quizWindow.width-100;
+					textureyPosition = textureyPosition + 30;
+				}
+				else{
+					texturexPosition = texturexPosition + 100;
+				}
+
+				//draws the texture in its designated location
+				GUI.DrawTexture(new Rect(texturexPosition,textureyPosition, 60, 60), itemToDraw, ScaleMode.ScaleToFit, true, 10.0F);
+
+			} 
 		}
 		
 	}
 	void DoMyWindow(int windowID) {
-		print ("Correct Answers " + theAnwser);
-		print ("Texture " + questionType);
 		if (GUI.Button (new Rect (quizWindow.xMin + 10, quizWindow.yMax - 40, 100, 30), answer1)){
 			//Button A was pressed, this will be the number 0 when checking answers
 			print(quizQuestion.checkAnwser(0));
@@ -85,6 +109,18 @@ public class QuizWindow : MonoBehaviour {
 			print(quizQuestion.checkAnwser(3));
 			
 		}
+	}
+
+
+	public static int IntParseFast(string value)
+	{
+		int result = 0;
+		for (int i = 0; i < value.Length; i++)
+		{
+			char letter = value[i];
+			result = 10 * result + (letter - 48);
+		}
+		return result;
 	}
 
 }
