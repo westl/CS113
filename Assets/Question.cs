@@ -13,6 +13,7 @@ using System.Text;
         public List<string> anwsers;
         public string question;
         public Boolean correct;
+		public string texture;
 
         public Question()
         {
@@ -20,11 +21,19 @@ using System.Text;
             correct = false;
         }
 
+		public string getTexture(){
+			return texture;
+		}
+
 
         public string getQuestionString()
         {
             return question;
         }
+
+		public string getCorrectAnwserValue(){
+			return anwsers [correctAnwser];
+		}
 
 		
         public List<string> getAnwsers()
