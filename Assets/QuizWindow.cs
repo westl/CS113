@@ -13,7 +13,7 @@ public class QuizWindow : MonoBehaviour {
 	private string answer2;
 	private string answer3;
 	private string answer4;
-	private Texture aTexture;
+	private Texture itemToDraw;
 	private Question quizQuestion;
 
 	public void ShowWindow(){
@@ -49,7 +49,11 @@ public class QuizWindow : MonoBehaviour {
 			GUI.ModalWindow(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
 			GUI.skin.window.wordWrap = true;
 			//TODO look up how to draw textures into the window, so we can generate textures depending on the question
-			GUI.DrawTexture(new Rect(10, 10, 60, 60), aTexture, ScaleMode.ScaleToFit, true, 10.0F);
+			//string test = "";
+			//if(test.Equals("Flower Question")){
+			//	itemToDraw = Resources.Load("Images/CratePinkGridSprite");
+			//}
+			GUI.DrawTexture(new Rect(10, 10, 60, 60), itemToDraw, ScaleMode.ScaleToFit, true, 10.0F);
 		}
 		
 	}
