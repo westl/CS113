@@ -11,11 +11,12 @@ using System.Collections;
         
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             int correctAnwser;
-			public static string texture = "Flower Question";
+			
 
             public BasicCountingQuestion()
             {
                 generateQuestion();
+				base.texture = "Flower Question";
 
             }
 

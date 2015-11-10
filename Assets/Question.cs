@@ -13,12 +13,17 @@ using System.Text;
         public List<string> anwsers;
         public string question;
         public Boolean correct;
+		public string texture;
 
         public Question()
         {
             this.question = "";
             correct = false;
         }
+
+		public string getTexture(){
+			return texture;
+		}
 
 
         public string getQuestionString()
