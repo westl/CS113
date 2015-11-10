@@ -26,6 +26,10 @@ using System.Text;
             return question;
         }
 
+		public string getCorrectAnwserValue(){
+			return anwsers [correctAnwser];
+		}
+
 		
         public List<string> getAnwsers()
         {

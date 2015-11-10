@@ -11,18 +11,20 @@ using System.Collections;
         
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             int correctAnwser;
-           
+			public static string texture = "Flower Question";
+
             public BasicCountingQuestion()
             {
                 generateQuestion();
 
             }
 
+		
             private void generateQuestion()
             {
 
                 correctAnwser = rnd.Next(5, 11);
-                base.question = string.Format(@"Angry robot will not let the player pss until you identify how many red flowers there are. Input the number of flowers?");
+                base.question = string.Format(@"Angry robot will not let the player pass until you identify how many red flowers there are. Input the number of flowers?");
                 base.anwsers = generateAnwsers(correctAnwser);
 
             }

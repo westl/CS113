@@ -15,6 +15,7 @@ public class QuizWindow : MonoBehaviour {
 	private string answer4;
 	private Texture aTexture;
 	private Question quizQuestion;
+	private string theAnwser;
 
 	public void ShowWindow(){
 		showWindow = true;
@@ -41,6 +42,8 @@ public class QuizWindow : MonoBehaviour {
 		this.answer2 = question.getAnwsers()[1];
 		this.answer3 = question.getAnwsers()[2];
 		this.answer4 = question.getAnwsers()[3];
+		this.theAnwser = question.getCorrectAnwserValue ();
+
 	}
 
 	void OnGUI() {
@@ -54,7 +57,7 @@ public class QuizWindow : MonoBehaviour {
 		
 	}
 	void DoMyWindow(int windowID) {
-
+		print ("Correct Answers " + theAnwser);
 		if (GUI.Button (new Rect (quizWindow.xMin + 10, quizWindow.yMax - 40, 100, 30), answer1)){
 			//Button A was pressed, this will be the number 0 when checking answers
 			print(quizQuestion.checkAnwser(0));
