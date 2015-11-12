@@ -17,5 +17,6 @@ Lamar - programming-lamar
 Instructions : 
  - Open the git bash
  - type  ```git fetch origin```  this should grab all the remote branches and create local copies onto your computer
+ - type ``` git branch -r``` to see all the remote branches that we currently have, then in the next line you can type the name of whatever gets printed to switch to that branch 
  - type  ```git checkout < branchname >``` for example ```git checkout programming-lamar``` , this should put you on your branch
  - When you have made a change to a file and want to save it, type  ```git add .```, this will add all changed files to preparation, then type  ```git commit -m < message >``` , for example ```git commit -m "updating sprites"```, finally you'll want to type  ```git push origin < branchname >``` for example ```git push origin art``` . This will push all of your changes up to your designated branch and they can then be accessed by other members of the team. 
