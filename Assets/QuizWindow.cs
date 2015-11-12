@@ -93,25 +93,35 @@ public class QuizWindow : MonoBehaviour {
 		if (GUI.Button (new Rect (quizWindow.xMin + 10, quizWindow.yMax - 40, 100, 30), answer1)){
 			//Button A was pressed, this will be the number 0 when checking answers
 			print(quizQuestion.checkAnwser(0));
-			
+			if(quizQuestion.correct)
+				Invoke("hideMyWindow",3);
+
 		}
 		if (GUI.Button (new Rect (quizWindow.xMin + 140, quizWindow.yMax - 40, 100, 30), answer2)) { 
 			//Button B was pressed, this will be the number 1 when checking answers
 			print(quizQuestion.checkAnwser(1));
+			if(quizQuestion.correct)
+				Invoke("hideMyWindow",3);
 		}
 		if (GUI.Button (new Rect (quizWindow.xMax - 230, quizWindow.yMax - 40, 100, 30), answer3)) { 
 			//Button C was pressed, this will be the number 2 when checking answers
 			print(quizQuestion.checkAnwser(2));
+			if(quizQuestion.correct)
+				Invoke("hideMyWindow",3);
 		}
 		if (GUI.Button(new Rect(quizWindow.xMax-110, quizWindow.yMax-40, 100, 30), answer4)) 
 		{
 			//Button D was pressed, this will be the number 3 when checking answers
 			print(quizQuestion.checkAnwser(3));
+			if(quizQuestion.correct)
+				Invoke("hideMyWindow",3);
 			
 		}
 	}
 
-
+	public void hideMyWindow(){
+		showWindow = false;
+	}
 	public static int IntParseFast(string value)
 	{
 		int result = 0;
