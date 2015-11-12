@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 
-namespace _113Quiz
-{
     class BasicCountingQuestion : Question
     {
       
         
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             int correctAnwser;
-           
+			
 
             public BasicCountingQuestion()
             {
                 generateQuestion();
+				base.texture = "Flower Question";
 
             }
 
+		
             private void generateQuestion()
             {
 
                 correctAnwser = rnd.Next(5, 11);
-                base.question = string.Format(@"Angry robot will not let the player pss until you identify how many red flowers there are. Input the number of flowers?");
+                base.question = string.Format(@"Angry robot will not let the player pass until you identify how many red flowers there are. Input the number of flowers?");
                 base.anwsers = generateAnwsers(correctAnwser);
 
             }
@@ -80,4 +81,4 @@ namespace _113Quiz
 
         }
     
-}
+

@@ -1,10 +1,11 @@
 ﻿using System;
+using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace _113Quiz
-{
+
     public class Question
     {
         
@@ -12,6 +13,7 @@ namespace _113Quiz
         public List<string> anwsers;
         public string question;
         public Boolean correct;
+		public string texture;
 
         public Question()
         {
@@ -19,12 +21,21 @@ namespace _113Quiz
             correct = false;
         }
 
+		public string getTexture(){
+			return texture;
+		}
+
 
         public string getQuestionString()
         {
             return question;
         }
 
+		public string getCorrectAnwserValue(){
+			return anwsers [correctAnwser];
+		}
+
+		
         public List<string> getAnwsers()
         {
             return anwsers;
@@ -40,5 +51,6 @@ namespace _113Quiz
             string s = "f";
             return s;
         }
+
     }
-}
+
