@@ -8,6 +8,7 @@ public class QuizWindow : MonoBehaviour {
 	//Quiz Window Script
 	public bool showWindow = false; // set to true once collision happens, then we prepare a quiz window 
 	private Rect quizWindow;
+	private Rect labelSection;
 	private string displayMessage;
 	private string answer1;
 	private string answer2;
@@ -20,6 +21,8 @@ public class QuizWindow : MonoBehaviour {
 	private int counterForDrawing; //number of times to draw the texture
 	private float texturexPosition ; //intial placement of the texture on the x-axis
 	private float textureyPosition; //initial placement of the texture on the y-axis
+	private string feedback; //actual feedback that is printed onto the screen
+	private bool showFeedBack = false; //show feed back or not
 
 	public void ShowWindow(){
 		showWindow = true;
@@ -31,12 +34,13 @@ public class QuizWindow : MonoBehaviour {
 	//this function returns the rectangle centered depending on screen size
 	Rect centerRectangle(Rect quizWindow){
 		quizWindow.x = ( Screen.width - quizWindow.width) / 2 ;
-		quizWindow.y = (Screen.height - quizWindow.height) / 2;
+		quizWindow.y = ( Screen.height - quizWindow.height) / 2;
 		return quizWindow;
 	}
 
 	public void CreateWindow(Question question){
-	quizWindow = new Rect(0,0,500,500);
+		quizWindow = new Rect(0,0,500,500);
+		labelSection = new Rect (0, 0, 500, 200);
 	//We want to make sure the window has all the information it will contain before we display the window
 	//otherwise sometimes the window will show up with its default values, while this is not a problem
 	//it would be better to make sure these variables contain the information they need to show regardless.
@@ -55,7 +59,7 @@ public class QuizWindow : MonoBehaviour {
 	void OnGUI() {
 		if (showWindow) {
 			//The window is then made 
-			GUI.ModalWindow(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
+			GUI.Window(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
 			GUI.skin.window.wordWrap = true;
 
 			//Depending if the type of question regards flowers, balls, etc we need to draw that image onto the quiz window.
@@ -84,43 +88,59 @@ public class QuizWindow : MonoBehaviour {
 
 				//draws the texture in its designated location
 				GUI.DrawTexture(new Rect(texturexPosition,textureyPosition, 60, 60), itemToDraw, ScaleMode.ScaleToFit, true, 10.0F);
+			} // END OF FOR LOOP
 
-			} 
+		
+
 		}
 		
 	}
 	void DoMyWindow(int windowID) {
 		if (GUI.Button (new Rect (quizWindow.xMin + 10, quizWindow.yMax - 40, 100, 30), answer1)){
 			//Button A was pressed, this will be the number 0 when checking answers
-			print(quizQuestion.checkAnwser(0));
+			showFeedBack = true;
+			feedback = quizQuestion.checkAnwser(0);
 			if(quizQuestion.correct)
 				Invoke("hideMyWindow",3);
 
 		}
 		if (GUI.Button (new Rect (quizWindow.xMin + 140, quizWindow.yMax - 40, 100, 30), answer2)) { 
 			//Button B was pressed, this will be the number 1 when checking answers
-			print(quizQuestion.checkAnwser(1));
+			showFeedBack = true;
+			feedback = quizQuestion.checkAnwser(1);
 			if(quizQuestion.correct)
 				Invoke("hideMyWindow",3);
 		}
 		if (GUI.Button (new Rect (quizWindow.xMax - 230, quizWindow.yMax - 40, 100, 30), answer3)) { 
 			//Button C was pressed, this will be the number 2 when checking answers
-			print(quizQuestion.checkAnwser(2));
+			showFeedBack = true;
+			feedback = quizQuestion.checkAnwser(2);
 			if(quizQuestion.correct)
 				Invoke("hideMyWindow",3);
 		}
 		if (GUI.Button(new Rect(quizWindow.xMax-110, quizWindow.yMax-40, 100, 30), answer4)) 
 		{
 			//Button D was pressed, this will be the number 3 when checking answers
-			print(quizQuestion.checkAnwser(3));
+			showFeedBack = true;
+			feedback = quizQuestion.checkAnwser(3);
 			if(quizQuestion.correct)
 				Invoke("hideMyWindow",3);
-			
+		}
+		//Code for after any possible answer is pressed
+		if(showFeedBack){
+			GUI.contentColor = Color.yellow;
+			GUI.Label(new Rect(quizWindow.x+40,quizWindow.y+100,quizWindow.width,100),feedback);
 		}
 	}
 
+	//When this function is called anywhere it will close the quiz window.
 	public void hideMyWindow(){
 		showWindow = false;
+	}
+
+	//Destroy the feedback
+	public void hideFeedback(){
+		showFeedBack = false;
 	}
 	public static int IntParseFast(string value)
 	{
