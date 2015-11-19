@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour {
 	private Rigidbody2D body;
 	private bool isGrounded;
 	public ArrayList groundObjects;
+	bool facingRight = true;
+	Animator anim;
 
 	//audio stuff
 	private AudioSource source;
@@ -25,6 +27,7 @@ public class Movement : MonoBehaviour {
 		groundObjects  = new ArrayList();
 		groundObjects.Add ("Floor");
 		source = GetComponent<AudioSource> ();
+		anim = GetComponent<Animator> ();
 
 	}
 
@@ -55,7 +58,10 @@ public class Movement : MonoBehaviour {
 	//this is essentially a while loop
 	void Update () {
 		//while we can still move, if a window pops up we no longer check for movement until its gone
+
 		if(!pauseMovement) {
+			float move = Input.GetAxis("Horizontal");
+			anim.SetFloat("Speed", Mathf.Abs(move));
 			if(Input.GetKey(KeyCode.A)){
 
 				//play sound 
@@ -73,6 +79,10 @@ public class Movement : MonoBehaviour {
 			if(Input.GetKey(KeyCode.D)){
 				body.velocity =  new Vector2(speed,body.velocity.y);
 			}
+			if (move > 0 && !facingRight)
+				Flip ();
+			else if (move < 0 && facingRight)
+				Flip ();
 		}
 	}
 
@@ -82,4 +92,11 @@ public class Movement : MonoBehaviour {
 		print (pauseMovement);
 	}
 
+	void Flip(){
+		facingRight = !facingRight;
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+
+	}
 }
