@@ -13,7 +13,7 @@ sysinfo.txt
 # ===================================== #
 [Ee]xported[Oo]bj/
 .vs/
-/*.userprefs
+/*.a
 /*.csproj
 /*.pidb
 /*.suo
