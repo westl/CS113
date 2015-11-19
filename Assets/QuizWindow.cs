@@ -24,6 +24,13 @@ public class QuizWindow : MonoBehaviour {
 	private string feedback; //actual feedback that is printed onto the screen
 	private bool showFeedBack = false; //show feed back or not
 
+
+	//sound stuff 
+	public AudioClip correctAnwserSound = Resources.Load ("Correct Sound") as AudioClip;
+	public AudioClip incorrectAnwserSound = Resources.Load ("Error Sound") as AudioClip;
+
+	private AudioSource source;
+
 	public void ShowWindow(){
 		showWindow = true;
 		//After showWindow is set to true OnGUI should initiate and create a window with the rectangle we 
@@ -53,6 +60,7 @@ public class QuizWindow : MonoBehaviour {
 		this.answerValue = question.getCorrectAnwserValue();
 		this.questionType = question.getTexture ();
 		counterForDrawing = IntParseFast (answerValue);
+		source = GetComponent<AudioSource> ();
 
 	}
 
@@ -100,31 +108,51 @@ public class QuizWindow : MonoBehaviour {
 			//Button A was pressed, this will be the number 0 when checking answers
 			showFeedBack = true;
 			feedback = quizQuestion.checkAnwser(0);
-			if(quizQuestion.correct)
+			if(quizQuestion.correct){
+				source.PlayOneShot(correctAnwserSound);
 				Invoke("hideMyWindow",3);
+			}else{
+				source.PlayOneShot(incorrectAnwserSound);
+			}
 
 		}
 		if (GUI.Button (new Rect (quizWindow.xMin + 140, quizWindow.yMax - 40, 100, 30), answer2)) { 
 			//Button B was pressed, this will be the number 1 when checking answers
 			showFeedBack = true;
 			feedback = quizQuestion.checkAnwser(1);
-			if(quizQuestion.correct)
+			if(quizQuestion.correct){
+				source.PlayOneShot(correctAnwserSound);
 				Invoke("hideMyWindow",3);
+			
+			}else{
+			source.PlayOneShot(incorrectAnwserSound);
+			}
+
 		}
 		if (GUI.Button (new Rect (quizWindow.xMax - 230, quizWindow.yMax - 40, 100, 30), answer3)) { 
 			//Button C was pressed, this will be the number 2 when checking answers
 			showFeedBack = true;
 			feedback = quizQuestion.checkAnwser(2);
-			if(quizQuestion.correct)
+			if(quizQuestion.correct){
+				//play correct sound 
+				source.PlayOneShot(correctAnwserSound);
 				Invoke("hideMyWindow",3);
+			
+			}else{
+				source.PlayOneShot(incorrectAnwserSound);
+			}
 		}
 		if (GUI.Button(new Rect(quizWindow.xMax-110, quizWindow.yMax-40, 100, 30), answer4)) 
 		{
 			//Button D was pressed, this will be the number 3 when checking answers
 			showFeedBack = true;
 			feedback = quizQuestion.checkAnwser(3);
-			if(quizQuestion.correct)
+			if(quizQuestion.correct){
+				source.PlayOneShot(correctAnwserSound);
 				Invoke("hideMyWindow",3);
+			}else{
+				source.PlayOneShot(incorrectAnwserSound);
+			}
 		}
 		//Code for after any possible answer is pressed
 		if(showFeedBack){
