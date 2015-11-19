@@ -32,9 +32,11 @@ namespace UnityStandardAssets.Cameras
                 return;
             }
 
+
             // initialise some vars, we'll be modifying these in a moment
             var targetForward = m_Target.forward;
             var targetUp = m_Target.up;
+
 
             if (m_FollowVelocity && Application.isPlaying)
             {
@@ -84,8 +86,9 @@ namespace UnityStandardAssets.Cameras
                 m_LastFlatAngle = currentFlatAngle;
             }
 
+			Vector3 v = new Vector3 (0, 5, -10);
             // camera position moves towards target position:
-            transform.position = Vector3.Lerp(transform.position,m_Target.position, deltaTime*2*m_MoveSpeed);
+			transform.position = Vector3.Lerp(transform.position,m_Target.position + v  , deltaTime*2*m_MoveSpeed);
 		
             // camera's rotation is split into two parts, which can have independend speed settings:
             // rotating towards the target's forward direction (which encompasses its 'yaw' and 'pitch')

@@ -10,6 +10,9 @@ public class Movement : MonoBehaviour {
 	private bool isGrounded;
 	public ArrayList groundObjects;
 
+	//audio stuff
+	private AudioSource source;
+	public AudioClip jumpSound;
 
 
 
@@ -21,6 +24,7 @@ public class Movement : MonoBehaviour {
 		isGrounded = false;
 		groundObjects  = new ArrayList();
 		groundObjects.Add ("Floor");
+		source = GetComponent<AudioSource> ();
 
 	}
 
@@ -53,10 +57,15 @@ public class Movement : MonoBehaviour {
 		//while we can still move, if a window pops up we no longer check for movement until its gone
 		if(!pauseMovement) {
 			if(Input.GetKey(KeyCode.A)){
+
+				//play sound 
+			
 				body.velocity = new Vector2(-speed,body.velocity.y);
 			}
 			if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)){
+
 				if(isGrounded){
+					source.PlayOneShot(jumpSound);
 					body.velocity = new Vector2(body.velocity.x, jumpHeight);
 				}
 			}
