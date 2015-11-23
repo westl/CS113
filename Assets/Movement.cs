@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -25,6 +25,8 @@ public class Movement : MonoBehaviour {
 		groundObjects  = new ArrayList();
 		groundObjects.Add ("Floor");
 		source = GetComponent<AudioSource> ();
+		source.Play ();
+
 
 	}
 
