@@ -68,12 +68,14 @@ public class QuizWindow : MonoBehaviour {
 
 			//Each question will have an identifier to inform us on which texture to draw
 			if(questionType.Equals("Flower Question")){
-				itemToDraw = (Texture2D)Resources.Load("Images/CratePinkGridSprite");
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/flower");
 			}
 			else if(questionType.Equals("Balls")){
-				//do nothing for now.
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/ball");
 			}
-
+			else if(questionType.Equals("Lollipops")){
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/ball");
+			}
 			//After we know which texture to draw we need to know how many times to draw it.
 			//the counterForDrawing variable tells us how many times to draw this texture.
 			for(int i = 0 ; i < counterForDrawing ; i++){
