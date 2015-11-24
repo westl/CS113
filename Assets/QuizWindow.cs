@@ -6,7 +6,7 @@ public class QuizWindow : MonoBehaviour {
 	//Movement object to pause movement
 
 	//Quiz Window Script
-	public bool showWindow = false; // set to true once collision happens, then we prepare a quiz window 
+	public bool showWindow = false; // set to true once collision happens, then we prepare a quiz window
 	private Rect quizWindow;
 	private Rect labelSection;
 	private string displayMessage;
@@ -76,12 +76,14 @@ public class QuizWindow : MonoBehaviour {
 
 			//Each question will have an identifier to inform us on which texture to draw
 			if(questionType.Equals("Flower Question")){
-				itemToDraw = (Texture2D)Resources.Load("Images/CratePinkGridSprite");
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/flower");
 			}
 			else if(questionType.Equals("Balls")){
-				//do nothing for now.
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/ball");
 			}
-
+			else if(questionType.Equals("Lollipops")){
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/ball");
+			}
 			//After we know which texture to draw we need to know how many times to draw it.
 			//the counterForDrawing variable tells us how many times to draw this texture.
 			for(int i = 0 ; i < counterForDrawing ; i++){
@@ -94,7 +96,8 @@ public class QuizWindow : MonoBehaviour {
 					texturexPosition = texturexPosition + 100;
 				}
 
-				//draws the texture in its designated location
+				//draws the texture in its designated location as long as we have set the item
+				if(itemToDraw!=null)
 				GUI.DrawTexture(new Rect(texturexPosition,textureyPosition, 60, 60), itemToDraw, ScaleMode.ScaleToFit, true, 10.0F);
 			} // END OF FOR LOOP
 
@@ -162,14 +165,19 @@ public class QuizWindow : MonoBehaviour {
 	}
 
 	//When this function is called anywhere it will close the quiz window.
+	//It's only called when the correct answer is chosen therefore we know the quiz
+	//is complete.
 	public void hideMyWindow(){
 		showWindow = false;
+		EventPopUp popup = gameObject.AddComponent<EventPopUp>();
+		popup.destroyObject ();
 	}
 
 	//Destroy the feedback
 	public void hideFeedback(){
 		showFeedBack = false;
 	}
+	
 	public static int IntParseFast(string value)
 	{
 		int result = 0;
