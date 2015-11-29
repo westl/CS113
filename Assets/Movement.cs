@@ -79,9 +79,8 @@ public class Movement : MonoBehaviour {
 	}
 
 	//When this function gets called we no longer listen for movement until it is called again. 
-	static public void PauseMovement(){
+	static public void ToggleMovement(){
 		pauseMovement = !pauseMovement;
-		print (pauseMovement);
 	}
 
 }

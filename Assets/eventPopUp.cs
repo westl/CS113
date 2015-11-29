@@ -6,11 +6,23 @@ using System.Linq;
 using System.Text;
 
 
-public class eventPopUp : MonoBehaviour {
+public class EventPopUp : MonoBehaviour {
 	string characterName = "CharacterRobotBoy";
 
-	
-		
+
+	public EventPopUp(){
+	//empty constructor so all methods in this class are visible
+	}
+	public void destroyObject(){
+		//If the quiz window returns to us that its complete we should destroy
+		//either the collider or the actual object that this script is attached to
+		//TODO : look for a way to fade the object before destorying it
+		Destroy (gameObject);
+		//movement is not enabled when the window is up , after the quiz window disappears we will
+		//call this again to enable movement
+		Movement.ToggleMovement();
+	}
+
 	void OnCollisionEnter2D(Collision2D coll) 
 	{
 		// If the Collider2D component is enabled on the object we collided with
@@ -19,7 +31,7 @@ public class eventPopUp : MonoBehaviour {
 
 		if (coll.collider.name == characterName)
 		{
-			Movement.PauseMovement();
+			Movement.ToggleMovement();
 			//Create one quiz
 			Quiz newQuiz = new Quiz(1);
 
