@@ -14,7 +14,8 @@ public class Movement : MonoBehaviour {
 	//audio stuff
 	private AudioSource source;
 	public AudioClip jumpSound;
-
+	private float tSoundEnd = 0.0f;
+	
 
 
 
@@ -80,7 +81,10 @@ public class Movement : MonoBehaviour {
 			 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)){
 
 				if(isGrounded){
-					source.PlayOneShot(jumpSound);
+					if (Time.time > tSoundEnd){ // if previous clip has finished playing...
+						source.PlayOneShot(jumpSound); // play a new one...
+						tSoundEnd = Time.time + jumpSound.length; // and calculate time for next
+					}
 					body.velocity = new Vector2(body.velocity.x, jumpHeight);
 					//transform.position += Vector3.up * 100 * Time.deltaTime;
 				}
