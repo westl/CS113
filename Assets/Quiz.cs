@@ -46,7 +46,7 @@ using System.Text;
             for (int i = 0; i < number; i++)
             {
 				//get a random number and accociate that number with a quiz 
-				quizNumber = rnd.Next (0,2);
+				quizNumber = rnd.Next (0,3);
 
 				//if the number is 0 then we want to make a subtraction question
 				if(quizNumber == 0)
@@ -54,6 +54,8 @@ using System.Text;
 				else if (quizNumber == 1)
 					questions.Add(new BasicCountingQuestion());
 
+				else if(quizNumber == 2)
+					questions.Add(new BasicCounting());
             }
 
             return questions;

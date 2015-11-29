@@ -59,17 +59,17 @@ using System.Collections;
                 if (anwser == base.correctAnwser)
                 {
                     base.correct = true;
-                    response = string.Format("Thats right! there are {0} flowers, and two yellow!", base.anwsers[base.correctAnwser]);
+                    response = string.Format("Thats right! there are {0} red flowers", base.anwsers[base.correctAnwser]);
                 }
                 else
                 {
                     if (int.Parse(base.anwsers[base.correctAnwser]) > int.Parse(base.anwsers[anwser]))
                     {
-                        response = string.Format("I do see {0} red flowers, but i also see more red flowers than that!", base.anwsers[anwser]);
+                        response = string.Format("I do see {0} red flowers, there are more red flowers than that!", base.anwsers[anwser]);
                     }
                     else
                     {
-                        response = string.Format("I don't see {0} red flowers! There are more than just red flowers there!", base.anwsers[anwser]);
+				response = string.Format("I don't see {0} red flowers! there are more red flowers than that!", base.anwsers[anwser]);
                     }
 
                 }
