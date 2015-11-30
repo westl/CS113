@@ -25,7 +25,7 @@ class BasicCounting : Question
 	public BasicCounting()
 	{
 		generateQuestion();
-		base.texture = "Counting Question";
+		base.texture = "Flowers";
 		
 	}
 	

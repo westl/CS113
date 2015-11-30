@@ -18,7 +18,7 @@ public class BasicSubtractionQuestion : Question {
 	public BasicSubtractionQuestion()
 	{
 		generateQuestion();
-		base.texture = "lollipops";
+		base.texture = "Lollipops";
 		
 	}
 	
