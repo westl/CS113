@@ -30,27 +30,6 @@ using System.Collections;
 
             }
 
-            private List<string> generateAnwsers(int anwser)
-            {
-
-                List<string> anwsers = new List<string>();
-                anwsers.Add(anwser.ToString());
-                //generate 3 random numbers between 10 that are not the anwser or in the list of anwsers
-                string possibleAnwser;
-                while (anwsers.Count < 4)
-                {
-                    possibleAnwser = rnd.Next(1, 11).ToString();
-                    if (!anwsers.Contains(possibleAnwser))
-                        anwsers.Add(possibleAnwser);
-                }
-
-                base.correctAnwser = rnd.Next(0, 4);
-                anwsers[0] = anwsers[base.correctAnwser];
-                anwsers[base.correctAnwser] = anwser.ToString();
-
-                return anwsers;
-            }
-
 
             public override string checkAnwser(int anwser)
             {

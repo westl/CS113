@@ -49,21 +49,24 @@ using UnityEngine;
         private List<Question> generateQuestions(int number)
         {
 
-            List<Question> questions = List<Question>();
+            List<Question> questions = new List<Question>();
 			int quizNumber;
             for (int i = 0; i < number; i++)
             {
 				//get a random number and accociate that number with a quiz 
-				quizNumber = rnd.Next (0,3);
+				quizNumber = rnd.Next (0,4);
 
 				//if the number is 0 then we want to make a subtraction question
 				if(quizNumber == 0)
 					questions.Add(new BasicSubtractionQuestion());
-			/*	else if (quizNumber == 1)
+				else if (quizNumber == 1)
 					questions.Add(new BasicCountingQuestion());
 
 				else if(quizNumber == 2)
-					questions.Add(new BasicCounting()); */
+					questions.Add(new BasicCounting()); 
+
+				else
+					questions.Add(new BasicAdditionQuestion());
             }
 
             return questions;

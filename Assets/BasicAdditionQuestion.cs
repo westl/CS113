@@ -15,7 +15,7 @@ public	class BasicAdditionQuestion : Question
 		public BasicAdditionQuestion()
 		{
 			generateQuestion();
-			base.texture = "Bricks";
+			base.texture = "FLowers";
 		}
 		
 		private void generateQuestion()
@@ -32,26 +32,6 @@ public	class BasicAdditionQuestion : Question
 			
 		}
 		
-		private List<string> generateAnwsers(int anwser)
-		{
-			
-			List<string> anwsers  = new List<string>();
-			anwsers.Add(anwser.ToString());
-			//generate 3 random numbers between 10 that are not the anwser or in the list of anwsers
-			string possibleAnwser;
-			while (anwsers.Count < 4)
-			{
-				possibleAnwser = rnd.Next(1, 11).ToString();
-				if (!anwsers.Contains(possibleAnwser))
-					anwsers.Add(possibleAnwser);
-			}
-			
-			base.correctAnwser = rnd.Next(0, 4);
-			anwsers[0] = anwsers[base.correctAnwser];
-			anwsers[base.correctAnwser] = anwser.ToString();
-			
-			return anwsers;
-		}
 		
 		
 		public override string checkAnwser(int anwser)
@@ -66,11 +46,13 @@ public	class BasicAdditionQuestion : Question
 			else{
 				if (int.Parse(base.anwsers[base.correctAnwser]) > int.Parse(base.anwsers[anwser]))
 				{
-					response = string.Format("I think i need more than {0} brick.... there needs to be {1} total, and i only have {2}. {0} plus {2} is only {3}",base.anwsers[anwser],biggerNumber,smallerNumber, smallerNumber + int.Parse(base.anwsers[anwser]));
+					base.correct = false;
+					response = string.Format("I think i need more than {0} brick.... there needs to be {1} total",base.anwsers[anwser],biggerNumber,smallerNumber, smallerNumber + int.Parse(base.anwsers[anwser]));
 				}
 				else
 				{
-					response = string.Format("I think i need less than {0} brick.... there needs to be {1} total, and i only have {2}. {0} plus {2} is {3}", base.anwsers[anwser], biggerNumber, smallerNumber, smallerNumber + int.Parse(base.anwsers[anwser]));
+					base.correct = false;
+					response = string.Format("I think i need less than {0} brick.... there needs to be {1} total", base.anwsers[anwser], biggerNumber, smallerNumber, smallerNumber + int.Parse(base.anwsers[anwser]));
 					
 				}
 				
