@@ -31,6 +31,7 @@ public class EventPopUp : MonoBehaviour {
 
 		if (coll.collider.name == characterName)
 		{
+			print("In here");
 			Movement.ToggleMovement();
 			//Create one quiz
 			Quiz newQuiz = new Quiz(1);

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 
 
-    public class Question
+    public class Question : MonoBehaviour
     {
         
         public int correctAnwser;
