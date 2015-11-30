@@ -30,8 +30,9 @@ public class Movement : MonoBehaviour {
 		groundObjects.Add ("Floor");
 		groundObjects.Add ("Stair");
 		source = GetComponent<AudioSource> ();
-		source.Play ();
-
+		//Check to see if there is a source attached, if not do nothing 
+		if(source != null)
+				source.Play ();
 
 	}
 
