@@ -107,6 +107,7 @@ public class QuizWindow : MonoBehaviour {
 		
 	}
 	void DoMyWindow(int windowID) {
+		print (quizQuestion.correctAnwser);
 		if (GUI.Button (new Rect (quizWindow.xMin + 10, quizWindow.yMax - 40, 100, 30), answer1)){
 			//Button A was pressed, this will be the number 0 when checking answers
 			showFeedBack = true;
