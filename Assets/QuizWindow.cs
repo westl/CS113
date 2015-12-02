@@ -67,12 +67,13 @@ public class QuizWindow : MonoBehaviour {
 	void OnGUI() {
 		if (showWindow) {
 			//The window is then made 
-			GUI.Window(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
+			quizWindow = centerRectangle(quizWindow);
+			GUI.Window(0, quizWindow, DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
 			GUI.skin.window.wordWrap = true;
 
 			//Depending if the type of question regards flowers, balls, etc we need to draw that image onto the quiz window.
-			texturexPosition = quizWindow.width-100;
-			textureyPosition = quizWindow.height/2;
+			texturexPosition = quizWindow.x+20;
+			textureyPosition = quizWindow.y + 100;
 
 			//Each question will have an identifier to inform us on which texture to draw
 			if(questionType.Equals("Flower Question")){
@@ -89,8 +90,8 @@ public class QuizWindow : MonoBehaviour {
 			for(int i = 0 ; i < counterForDrawing ; i++){
 				//for now each row will have  5 textures before creating a new row. 
 				if( (i%5)==0 ){
-					texturexPosition = quizWindow.width-100;
-					textureyPosition = textureyPosition + 30;
+					texturexPosition = quizWindow.x+20;
+					textureyPosition = textureyPosition + 100;
 				}
 				else{
 					texturexPosition = texturexPosition + 100;
