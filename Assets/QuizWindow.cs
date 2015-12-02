@@ -8,6 +8,7 @@ public class QuizWindow : MonoBehaviour {
 	//Quiz Window Script
 	public bool showWindow = false; // set to true once collision happens, then we prepare a quiz window
 	private Rect quizWindow;
+	private Rect centerWindow;
 	private Rect labelSection;
 	private string displayMessage;
 	private string answer1;
@@ -67,13 +68,13 @@ public class QuizWindow : MonoBehaviour {
 	void OnGUI() {
 		if (showWindow) {
 			//The window is then made 
-			quizWindow = centerRectangle(quizWindow);
-			GUI.Window(0, quizWindow, DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
+			centerWindow = centerRectangle(quizWindow);
+			GUI.Window(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
 			GUI.skin.window.wordWrap = true;
 
 			//Depending if the type of question regards flowers, balls, etc we need to draw that image onto the quiz window.
-			texturexPosition = quizWindow.x+20;
-			textureyPosition = quizWindow.y + 100;
+			texturexPosition = centerWindow.x+20;
+			textureyPosition = centerWindow.y + 100;
 
 			//Each question will have an identifier to inform us on which texture to draw
 			if(questionType.Equals("Flower Question")){
@@ -90,7 +91,7 @@ public class QuizWindow : MonoBehaviour {
 			for(int i = 0 ; i < counterForDrawing ; i++){
 				//for now each row will have  5 textures before creating a new row. 
 				if( (i%5)==0 ){
-					texturexPosition = quizWindow.x+20;
+					texturexPosition = centerWindow.x+20;
 					textureyPosition = textureyPosition + 100;
 				}
 				else{
