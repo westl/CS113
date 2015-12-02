@@ -7,13 +7,13 @@
 [Ll]ibrary/
 sysinfo.txt
 *.stackdump
-*.meta
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 [Ee]xported[Oo]bj/
 .vs/
-/*.userprefs
+/*.a
 /*.csproj
 /*.pidb
 /*.suo

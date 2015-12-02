@@ -1,18 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Movement : MonoBehaviour {
-	public float speed;
+	public float speed = 2f;
 	public float jumpHeight;
 	static private bool pauseMovement = false;
 	private Rigidbody2D body;
 	private bool isGrounded;
 	public ArrayList groundObjects;
-	bool facingRight = true;
-	Animator anim;
-
-
+	public ArrayList stopers;
+	bool stop = false ;
+	//audio stuff
+	private AudioSource source;
+	public AudioClip jumpSound;
+	private float tSoundEnd = 0.0f;
+	
 
 
 
@@ -22,8 +25,14 @@ public class Movement : MonoBehaviour {
 		body = GetComponent<Rigidbody2D> ();
 		isGrounded = false;
 		groundObjects  = new ArrayList();
+		stopers = new ArrayList ();
+		stopers.Add ("Stair");
 		groundObjects.Add ("Floor");
-		anim = GetComponent<Animator> ();
+		groundObjects.Add ("Stair");
+		source = GetComponent<AudioSource> ();
+		//Check to see if there is a source attached, if not do nothing 
+		if(source != null)
+				source.Play ();
 
 	}
 
@@ -33,10 +42,13 @@ public class Movement : MonoBehaviour {
 	public void OnCollisionEnter2D(Collision2D coll) 
 	{
 
-		if(groundObjects.Contains(coll.gameObject.name))
-		{
+		if (groundObjects.Contains (coll.gameObject.name)) {
 			isGrounded = true;
+		} 
+		if (stopers.Contains (coll.gameObject.name)) {
+				stop = true;
 		}
+
 	}
 
 
@@ -47,6 +59,9 @@ public class Movement : MonoBehaviour {
 		{
 				isGrounded = false;
 		}
+		if (stopers.Contains(coll.gameObject.name)) {
+			stop = false;
+		}
 	}
 
 
@@ -56,38 +71,38 @@ public class Movement : MonoBehaviour {
 		//while we can still move, if a window pops up we no longer check for movement until its gone
 
 		if(!pauseMovement) {
-			float move = Input.GetAxis("Horizontal");
-			anim.SetFloat("Speed", Mathf.Abs(move));
-			if(Input.GetKey(KeyCode.A)){
-				body.velocity = new Vector2(-speed,body.velocity.y);
+			if(Input.GetKey(KeyCode.A) && !(stop)){
+
+				//play sound 
+				//body.velocity = new Vector2(-speed,body.velocity.y);
+				//
+				
+				transform.position += Vector3.left * speed * Time.deltaTime;
 			}
-			if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)){
+			 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)){
+
 				if(isGrounded){
+					if (Time.time > tSoundEnd){ // if previous clip has finished playing...
+						source.PlayOneShot(jumpSound); // play a new one...
+						tSoundEnd = Time.time + jumpSound.length; // and calculate time for next
+					}
 					body.velocity = new Vector2(body.velocity.x, jumpHeight);
+					//transform.position += Vector3.up * 100 * Time.deltaTime;
 				}
 			}
 
-			if(Input.GetKey(KeyCode.D)){
-				body.velocity =  new Vector2(speed,body.velocity.y);
+			 if(Input.GetKey(KeyCode.D)  && !(stop)){
+
+				//body.velocity =  new Vector2(speed,body.velocity.y - 2);
+				//body.velocity = new Vector2(speed,1);
+				transform.position += Vector3.right * speed * Time.deltaTime;
 			}
-			if (move > 0 && !facingRight)
-				Flip ();
-			else if (move < 0 && facingRight)
-				Flip ();
 		}
 	}
 
 	//When this function gets called we no longer listen for movement until it is called again. 
-	static public void PauseMovement(){
+	static public void ToggleMovement(){
 		pauseMovement = !pauseMovement;
-		print (pauseMovement);
 	}
 
-	void Flip(){
-		facingRight = !facingRight;
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-
-	}
 }
