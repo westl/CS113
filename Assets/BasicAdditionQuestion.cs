@@ -23,7 +23,7 @@ public	class BasicAdditionQuestion : Question
 			
 			biggerNumber = rnd.Next(5,11);
 			smallerNumber = rnd.Next(1, biggerNumber);
-			base.question = string.Format(@"A sad robot needs to fill the gam in the path in order to cross and meet his robot friends. But he doesn't know how many bricks he needs to put down. There are {0} bricks total, but only {1} are in place. How many bricks does he need?", biggerNumber, smallerNumber);
+			base.question = string.Format(@"A sad robot needs to fill the gap in the path in order to cross and meet his robot friends. But he doesn't know how many bricks he needs to put down. There are {0} bricks total, but only {1} are in place. How many bricks does he need?", biggerNumber, smallerNumber);
 			
 			int anwser = biggerNumber - smallerNumber;
 			base.anwsers = generateAnwsers(anwser);
