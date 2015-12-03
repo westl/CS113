@@ -15,7 +15,7 @@ public	class BasicAdditionQuestion : Question
 		public BasicAdditionQuestion()
 		{
 			generateQuestion();
-			base.texture = "FLowers";
+			base.texture = "Bricks";
 		}
 		
 		private void generateQuestion()
