@@ -16,7 +16,7 @@ using System.Collections;
             public BasicCountingQuestion()
             {
                 generateQuestion();
-				base.texture = "Flower Question";
+				base.texture = "Pink Flower";
 
             }
 
@@ -25,7 +25,7 @@ using System.Collections;
             {
 
                 correctAnwser = rnd.Next(5, 11);
-                base.question = string.Format(@"Angry robot will not let the player pass until you identify how many red flowers there are. Input the number of flowers?");
+                base.question = string.Format(@"Angry robot will not let the player pass until you identify how many pink flowers there are. Input the number of flowers?");
                 base.anwsers = generateAnwsers(correctAnwser);
 
             }
@@ -38,17 +38,17 @@ using System.Collections;
                 if (anwser == base.correctAnwser)
                 {
                     base.correct = true;
-                    response = string.Format("Thats right! there are {0} red flowers", base.anwsers[base.correctAnwser]);
+                    response = string.Format("Thats right! there are {0} pink flowers", base.anwsers[base.correctAnwser]);
                 }
                 else
                 {
                     if (int.Parse(base.anwsers[base.correctAnwser]) > int.Parse(base.anwsers[anwser]))
                     {
-                        response = string.Format("I do see {0} red flowers, there are more red flowers than that!", base.anwsers[anwser]);
+                        response = string.Format("I do see {0} pink flowers, there are more pink flowers than that!", base.anwsers[anwser]);
                     }
                     else
                     {
-				response = string.Format("I don't see {0} red flowers! there are more red flowers than that!", base.anwsers[anwser]);
+				response = string.Format("I don't see {0} pink flowers! there are more pink flowers than that!", base.anwsers[anwser]);
                     }
 
                 }
