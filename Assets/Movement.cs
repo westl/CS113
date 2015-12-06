@@ -29,6 +29,8 @@ public class Movement : MonoBehaviour {
 		stopers.Add ("Stair");
 		groundObjects.Add ("Floor");
 		groundObjects.Add ("Stair");
+		groundObjects.Add ("Box");
+
 		source = GetComponent<AudioSource> ();
 		//Check to see if there is a source attached, if not do nothing 
 		if(source != null)

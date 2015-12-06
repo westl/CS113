@@ -10,7 +10,7 @@ using System.Text;
 /*
  * Every question needs to implement a generate quesion and checkAnswer
  */
-    public class Question : MonoBehaviour
+    public class Question
     {
 
 		//type of sprite to be loaded with the question 

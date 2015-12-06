@@ -8,6 +8,7 @@ public class QuizWindow : MonoBehaviour {
 	//Quiz Window Script
 	public bool showWindow = false; // set to true once collision happens, then we prepare a quiz window
 	private Rect quizWindow;
+	private Rect centerWindow;
 	private Rect labelSection;
 	private string displayMessage;
 	private string answer1;
@@ -67,30 +68,38 @@ public class QuizWindow : MonoBehaviour {
 	void OnGUI() {
 		if (showWindow) {
 			//The window is then made 
+			centerWindow = centerRectangle(quizWindow);
 			GUI.Window(0, centerRectangle(quizWindow), DoMyWindow, "Quiz Time!" + "\n" + displayMessage);
 			GUI.skin.window.wordWrap = true;
 
 			//Depending if the type of question regards flowers, balls, etc we need to draw that image onto the quiz window.
-			texturexPosition = quizWindow.width-100;
-			textureyPosition = quizWindow.height/2;
+			texturexPosition = centerWindow.x+20;
+			textureyPosition = centerWindow.y + 100;
 
 			//Each question will have an identifier to inform us on which texture to draw
-			if(questionType.Equals("Flower Question")){
-				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/flower");
+			if(questionType.Equals("Pink Flower")){
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/PinkFlower");
+
 			}
-			else if(questionType.Equals("Balls")){
-				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/ball");
+			else if(questionType.Equals("Flowers")){
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/Flower");
+				
+			}
+			else if(questionType.Equals("Bricks")){
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/Brick");
+	
 			}
 			else if(questionType.Equals("Lollipops")){
-				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/ball");
+				itemToDraw = (Texture2D)Resources.Load("MarissaPixels/Lollipop");
+	
 			}
 			//After we know which texture to draw we need to know how many times to draw it.
 			//the counterForDrawing variable tells us how many times to draw this texture.
 			for(int i = 0 ; i < counterForDrawing ; i++){
 				//for now each row will have  5 textures before creating a new row. 
 				if( (i%5)==0 ){
-					texturexPosition = quizWindow.width-100;
-					textureyPosition = textureyPosition + 30;
+					texturexPosition = centerWindow.x+20;
+					textureyPosition = textureyPosition + 100;
 				}
 				else{
 					texturexPosition = texturexPosition + 100;
@@ -98,7 +107,7 @@ public class QuizWindow : MonoBehaviour {
 
 				//draws the texture in its designated location as long as we have set the item
 				if(itemToDraw!=null)
-				GUI.DrawTexture(new Rect(texturexPosition,textureyPosition, 60, 60), itemToDraw, ScaleMode.ScaleToFit, true, 10.0F);
+					GUI.DrawTexture(new Rect(texturexPosition,textureyPosition, 60, 60), itemToDraw);
 			} // END OF FOR LOOP
 
 		
@@ -107,7 +116,7 @@ public class QuizWindow : MonoBehaviour {
 		
 	}
 	void DoMyWindow(int windowID) {
-		print (quizQuestion.correctAnwser);
+
 		if (GUI.Button (new Rect (quizWindow.xMin + 10, quizWindow.yMax - 40, 100, 30), answer1)){
 			//Button A was pressed, this will be the number 0 when checking answers
 			showFeedBack = true;

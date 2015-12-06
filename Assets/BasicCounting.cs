@@ -34,9 +34,7 @@ class BasicCounting : Question
 	{
 		
 		correctAnwser = rnd.Next(5, 11);
-		base.question = string.Format(@"Angry robot will not let player pass until they identify how many 
-		flowers there are blocking their path. Must input a single number.
-		");
+		base.question = string.Format(@"Angry robot will not let player pass until they identify how many  flowers there are blocking their path. Must input a single number.");
 		base.anwsers = generateAnwsers(correctAnwser);
 	}
 
