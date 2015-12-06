@@ -8,8 +8,13 @@ using System.Text;
 
 public class EventPopUp : MonoBehaviour {
 	string characterName = "CharacterRobotBoy";
+	bool isPlayerInvulnerable = false;
 	int QuizNumber = 0;
+	private GameObject boss;
 
+	void Awake(){
+		boss = GameObject.FindGameObjectWithTag ("Boss");
+	}
 	public EventPopUp(){
 	//empty constructor so all methods in this class are visible
 	}
@@ -20,20 +25,26 @@ public class EventPopUp : MonoBehaviour {
 		Destroy (gameObject);
 		//movement is not enabled when the window is up , after the quiz window disappears we will
 		//call this again to enable movement
-		Movement.ToggleMovement();
+		if(isPlayerInvulnerable == false)
+			Movement.ToggleMovement(); // only want to toggle movement when the player is no invulnerable
 	}
-
+	public void invulTrue(){
+		isPlayerInvulnerable = true;		
+	}
+	public void invulFalse(){
+		isPlayerInvulnerable = false;	
+	}
 	void OnCollisionEnter2D(Collision2D coll) 
 	{
-		// If the Collider2D component is enabled on the object we collided with
-		//then we create a quiz object to generate us a question then we will pass
-		//the question and its possible answers to the quiz window to display
-
-		if (QuizNumber < 1) {
-		
+		//If the player is invulnerable we immediately destroy the robot on contact.
+		//If the player is not invulnerable then we present them with a quiz!
+		if (isPlayerInvulnerable == true) {
+			destroyObject();
+		}
+		else if (QuizNumber < 1  ) {
 			QuizNumber++;
-			if (coll.collider.name == characterName) {
-	
+			//If the character collides and is not invulnerable
+			if (coll.collider.name == characterName && (isPlayerInvulnerable == false) ) {
 				Movement.ToggleMovement ();
 				//Create one quiz
 				Quiz newQuiz = new Quiz (1);
