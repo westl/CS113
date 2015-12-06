@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour {
 	private AudioSource source;
 	public AudioClip jumpSound;
 	private float tSoundEnd = 0.0f;
-	
+	private Animator animator;
 
 
 
@@ -30,6 +30,7 @@ public class Movement : MonoBehaviour {
 		groundObjects.Add ("Floor");
 		groundObjects.Add ("Stair");
 		groundObjects.Add ("Box");
+		animator = this.GetComponent<Animator>();
 
 		source = GetComponent<AudioSource> ();
 		//Check to see if there is a source attached, if not do nothing 
@@ -46,6 +47,7 @@ public class Movement : MonoBehaviour {
 
 		if (groundObjects.Contains (coll.gameObject.name)) {
 			isGrounded = true;
+			animator.SetBool("Jumping",false);
 		} 
 		if (stopers.Contains (coll.gameObject.name)) {
 				stop = true;
@@ -60,6 +62,9 @@ public class Movement : MonoBehaviour {
 		if(groundObjects.Contains(coll.gameObject.name))
 		{
 				isGrounded = false;
+				animator.SetBool("Running",false);
+				animator.SetBool("Jumping",true);
+				
 		}
 		if (stopers.Contains(coll.gameObject.name)) {
 			stop = false;
@@ -72,33 +77,46 @@ public class Movement : MonoBehaviour {
 	void Update () {
 		//while we can still move, if a window pops up we no longer check for movement until its gone
 
-		if(!pauseMovement) {
-			if(Input.GetKey(KeyCode.A) && !(stop)){
+		if (!pauseMovement) {
+			if (Input.GetKey (KeyCode.A) && !(stop)) {
 
 				//play sound 
 				//body.velocity = new Vector2(-speed,body.velocity.y);
 				//
-				
+				animator.SetBool ("Idle", false);
+				animator.SetBool ("Running", true);
 				transform.position += Vector3.left * speed * Time.deltaTime;
 			}
-			 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)){
+			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.Space)) {
 
-				if(isGrounded){
-					if (Time.time > tSoundEnd){ // if previous clip has finished playing...
-						source.PlayOneShot(jumpSound); // play a new one...
+				if (isGrounded) {
+					animator.SetBool ("Running", false);
+					animator.SetBool ("Idle", false);
+					animator.SetBool ("Jumping", true);
+					if (Time.time > tSoundEnd) { // if previous clip has finished playing...
+						source.PlayOneShot (jumpSound); // play a new one...
 						tSoundEnd = Time.time + jumpSound.length; // and calculate time for next
 					}
-					body.velocity = new Vector2(body.velocity.x, jumpHeight);
+					body.velocity = new Vector2 (body.velocity.x, jumpHeight);
 					//transform.position += Vector3.up * 100 * Time.deltaTime;
 				}
 			}
 
-			 if(Input.GetKey(KeyCode.D)  && !(stop)){
-
+			if (Input.GetKey (KeyCode.D) && !(stop)) {
+				animator.SetBool ("Idle", false);
+				animator.SetBool ("Running", true);
 				//body.velocity =  new Vector2(speed,body.velocity.y - 2);
 				//body.velocity = new Vector2(speed,1);
 				transform.position += Vector3.right * speed * Time.deltaTime;
+			} else{
+
+				animator.SetBool ("Running", false);
+				animator.SetBool ("Idle", true);
 			}
+		}
+		else {
+			animator.SetBool ("Running", false);
+			animator.SetBool ("Idle", true);
 		}
 	}
 

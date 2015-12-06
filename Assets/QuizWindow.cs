@@ -170,7 +170,8 @@ public class QuizWindow : MonoBehaviour {
 		//Code for after any possible answer is pressed
 		if(showFeedBack){
 			GUI.contentColor = Color.yellow;
-			GUI.Label(new Rect(quizWindow.x+40,quizWindow.y+100,quizWindow.width,100),feedback);
+			GUI.Label(new Rect(quizWindow.x+20,quizWindow.y+100,quizWindow.width,100),feedback);
+			GUI.skin.label.wordWrap=true;
 		}
 	}
 
