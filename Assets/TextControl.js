@@ -1,4 +1,5 @@
 ﻿var isQuitButton = false;
+var isStarterScreen = false;
 
 function OnMouseUp()
 {
@@ -7,9 +8,14 @@ function OnMouseUp()
         //quit the game
         Application.Quit();
     }
-    else
+    else if (isStarterScreen)
     {
         //load level
         Application.LoadLevel(1);
     }
+    else
+    {
+        //load level
+        Application.LoadLevel(2);
+}
 }

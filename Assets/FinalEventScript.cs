@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FinalEventScript : MonoBehaviour {
 	private bool showFinalWindow = false;
-	private Rect centerWindow = new Rect(0,0,500,500);
+	private Rect centerWindow = new Rect(0,0,800,500);
 	private string completionScript;
 	private Texture2D itemToDraw;
 	// Use this for initialization
