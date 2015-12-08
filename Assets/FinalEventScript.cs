@@ -5,9 +5,10 @@ public class FinalEventScript : MonoBehaviour {
 	private bool showFinalWindow = false;
 	private Rect centerWindow = new Rect(0,0,500,500);
 	private string completionScript;
+	private Texture2D itemToDraw;
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -27,6 +28,13 @@ public class FinalEventScript : MonoBehaviour {
 			centerWindow = centerRectangle(centerWindow);
 			GUI.Window(0, centerWindow, DoMyWindow, "Game Completed!" + "\n" + completionScript);
 			GUI.skin.window.wordWrap = true;
+			itemToDraw = (Texture2D)Resources.Load("MarissaPixels/conclusion");
+			if(itemToDraw!=null){
+				GUI.DrawTexture(new Rect(centerWindow.x,centerWindow.y, centerWindow.width, centerWindow.height), itemToDraw);
+				print ("drawing");
+			}
+				
+		
 		}
 	}
 
